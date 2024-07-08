@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Your Watchlist</h2>
+    {% if watchlist_items %}
+            {% for watchlist_item in watchlist_items %}
+                    <a href="{% url 'listing' watchlist_item.item.id %}">
+                        <div class="listing-container">
+                            {% if watchlist_item.item.image %}
+                                <img class="listing-image" src="/media/{{ watchlist_item.item.image }}">
+                            {% else %}
+                                <img class="listing-image" src="https://placehold.jp/300x200.png">
+                            {% endif %}
+                            <div class="listing-details">
+                                <h1 class="listing-item">{{ watchlist_item.item.title }}</h1>
+                                <p class="listing-description">{{ watchlist_item.item.description }}</p>
+                                <h5 class="listing-item"><span>Starting Bid:</span> ${{ watchlist_item.item.starting_bid }}</h5>
+                                <p class="listing-item" style="margin-top: 50px;">Created {{ watchlist_item.item.creation_date }}</p>
+                            </div>
+                        </div>
+                    </a>
+
+            {% endfor %}
+    {% else %}
+        <p>You have no items in your watchlist.</p>
+    {% endif %}
+{% endblock %}

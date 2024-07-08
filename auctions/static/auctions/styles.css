@@ -1,0 +1,50 @@
+body {
+    padding: 10px;
+}
+
+span {
+    font-weight: bold;
+}
+
+.listing-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+a .listing-container:hover{ 
+    background-color: rgb(197, 197, 197);
+}
+
+.listing-image {
+    margin-right: 20px;
+    width: 300px;
+    height: 200px;
+}
+
+.listing-details {
+    flex-grow: 1;
+}
+
+.listing-item {
+    margin: 5px 0;
+}
+
+.listing-description {
+    color: grey;
+    font-style: italic;
+    font-weight: light;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.categories-a:hover {
+    color: blue;
+    text-decoration: underline;
+}

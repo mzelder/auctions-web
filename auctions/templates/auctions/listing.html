@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="card" style="padding: 10px;">
+    <h1>Listing: {{ listing.title }}</h1>
+    <a href="{% url 'add_to_watchlist' listing.id %}" class="btn-sm btn-primary">Add to watchlist</a>
+    {% if listing.image %}
+        <img class="listing-image" src="/media/{{ listing.image }}">
+    {% else %}
+        <img class="listing-image" src="https://placehold.jp/300x200.png">
+    {% endif %}
+    <p class="listing-description" style="margin-top: 10px;">{{ listing.description }}</p>
+    <h5 class="listing-item"><span>Price:</span> ${{ listing.highest_bid }}</h5>
+    <p>
+        {{ bids.count }} bids(s) so far. {{ message }}
+    </p>
+    <form action="{% url 'bid' listing.id %}" method="post">
+        {% csrf_token %}
+        <input type="number" name="amount" placeholder="Enter your bid">
+        <button type="submit" class="btn btn-primary">Place Bid</button>
+    </form>
+    <hr>
+    <h3>Details</h3>
+    <ul>
+        <li>Listed by: {{ listing.user }}</li>
+        <li>Category: {{ listing.category }}</li>
+    </ul>
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in comments %}
+            <li>{{ comment.user }}: {{ comment.comment }}</li>
+        {% endfor %}
+    </ul>
+    <form action="{% url 'add_comment' listing.id %}" method="post">
+        {% csrf_token %}
+        <textarea name="comment" placeholder="Add a comment"></textarea>
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+</div>
+{% endblock %}

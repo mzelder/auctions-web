@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if category %}
+        <h2>Listings in {{ category.name }}</h2>
+    {% else %}
+        <h2>Active Listings</h2>
+    {% endif %}
+    {% for listing in listings %}
+        <a href="{% url 'listing' listing.id %}">
+            <div class="listing-container">
+                {% if listing.image %}
+                    <img class="listing-image" src="/media/{{ listing.image }}">
+                {% else %}
+                    <img class="listing-image" src="https://placehold.jp/300x200.png">
+                {% endif %}
+                <div class="listing-details">
+                    <h1 class="listing-item">{{ listing.title }}</h1>
+                    <p class="listing-description">{{ listing.description }}</p>
+                    <h5 class="listing-item"><span>Price:</span> ${{ listing.highest_bid }}</h5>
+                    <p class="listing-item" style="margin-top: 50px;">Created {{ listing.creation_date }}</p>
+                </div>
+            </div>
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock %}
